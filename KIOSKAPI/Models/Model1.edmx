@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLKIOSKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="KIOSK">
+          <Key>
+            <PropertyRef Name="MAKO" />
+          </Key>
+          <Property Name="MAKO" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="MaToken" Type="varchar" MaxLength="128" />
+          <Property Name="TenKO" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgayXD" Type="date" />
+          <Property Name="NgayVH" Type="date" />
+          <Property Name="DiaDiem" Type="nvarchar" MaxLength="100" />
+          <Property Name="NhietDo" Type="varchar" MaxLength="10" />
+          <Property Name="TrangThaiKo" Type="bit" Nullable="false" />
+          <Property Name="ImageBanner" Type="varchar" MaxLength="250" />
+          <Property Name="ConnectStr" Type="varchar" MaxLength="200" />
+          <Property Name="TrangThaiPV" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="QLKIOSKModelStoreContainer">
+          <EntitySet Name="KIOSK" EntityType="Self.KIOSK" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLKIOSKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="KIOSK">
+          <Key>
+            <PropertyRef Name="MAKO" />
+          </Key>
+          <Property Name="MAKO" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaToken" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="TenKO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgayXD" Type="DateTime" Precision="0" />
+          <Property Name="NgayVH" Type="DateTime" Precision="0" />
+          <Property Name="DiaDiem" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NhietDo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TrangThaiKo" Type="Boolean" Nullable="false" />
+          <Property Name="ImageBanner" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ConnectStr" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="TrangThaiPV" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="QLKIOSKEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KIOSKs" EntityType="Self.KIOSK" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLKIOSKModelStoreContainer" CdmEntityContainer="QLKIOSKEntities">
+          <EntitySetMapping Name="KIOSKs">
+            <EntityTypeMapping TypeName="QLKIOSKModel.KIOSK">
+              <MappingFragment StoreEntitySet="KIOSK">
+                <ScalarProperty Name="MAKO" ColumnName="MAKO" />
+                <ScalarProperty Name="MaToken" ColumnName="MaToken" />
+                <ScalarProperty Name="TenKO" ColumnName="TenKO" />
+                <ScalarProperty Name="NgayXD" ColumnName="NgayXD" />
+                <ScalarProperty Name="NgayVH" ColumnName="NgayVH" />
+                <ScalarProperty Name="DiaDiem" ColumnName="DiaDiem" />
+                <ScalarProperty Name="NhietDo" ColumnName="NhietDo" />
+                <ScalarProperty Name="TrangThaiKo" ColumnName="TrangThaiKo" />
+                <ScalarProperty Name="ImageBanner" ColumnName="ImageBanner" />
+                <ScalarProperty Name="ConnectStr" ColumnName="ConnectStr" />
+                <ScalarProperty Name="TrangThaiPV" ColumnName="TrangThaiPV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
