@@ -24,28 +24,25 @@ namespace KIOSKAPI.Controllers
         /// <summary>
         /// Generate new token for kiosk
         /// </summary>
-        /// <param name="f">apikey;mako</param>
-        /// <returns>token</returns>
+        /// <param name="apikey"></param>
+        /// <param name="makiosk"></param>
+        /// <returns></returns>
         [AllowAnonymous]
-        [HttpPost]
-        public IHttpActionResult GetToken(FormDataCollection f)
+        public IHttpActionResult GetToken(string apikey, string makiosk)
         {
-            string apikey = f["apikey"];
-            string mako = f["mako"];
-
-            if (apikey == null || mako == null)
+            if (apikey == null || makiosk == null)
             {
                 return BadRequest("Null parameters");
             }
 
             string token = string.Empty;
-            string storekey = ConfigurationManager.AppSettings["apikey"].ToString();
-            if (!apikey.Equals(storekey))
+            string stored_apikey = ConfigurationManager.AppSettings["apikey"].ToString();
+            if (!apikey.Equals(stored_apikey))
             {
                 return Unauthorized();
             }
 
-            KIOSK kIOSK = db.KIOSKs.SingleOrDefault(x=>x.MAKO.Equals(mako));
+            KIOSK kIOSK = db.KIOSKs.SingleOrDefault(x=>x.MAKO.Equals(makiosk));
             if (kIOSK == null)
             {
                 return NotFound();
@@ -67,7 +64,7 @@ namespace KIOSKAPI.Controllers
             }
             catch (Exception ex)
             {
-
+                
                 return InternalServerError(ex);
             }
 

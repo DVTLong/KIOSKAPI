@@ -12,33 +12,36 @@ namespace KIOSKAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class KIOSK
+    public partial class HopDong
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public KIOSK()
+        public HopDong()
         {
             this.ChiTietHopDongs = new HashSet<ChiTietHopDong>();
-            this.HoaDons = new HashSet<HoaDon>();
-            this.LanNaps = new HashSet<LanNap>();
+            this.DotKhuyenMais = new HashSet<DotKhuyenMai>();
+            this.MatHangs = new HashSet<MatHang>();
+            this.BuoiAns = new HashSet<BuoiAn>();
+            this.LoaiMatHangs = new HashSet<LoaiMatHang>();
         }
     
-        public string MAKO { get; set; }
-        public string MaToken { get; set; }
-        public string TenKO { get; set; }
-        public Nullable<System.DateTime> NgayXD { get; set; }
-        public Nullable<System.DateTime> NgayVH { get; set; }
-        public string DiaDiem { get; set; }
-        public string NhietDo { get; set; }
-        public bool TrangThaiKo { get; set; }
-        public byte[] ImageBanner { get; set; }
-        public string ConnectStr { get; set; }
+        public int SoHD { get; set; }
+        public System.DateTime NgayLapHD { get; set; }
+        public string NoiDungHD { get; set; }
+        public int MALHD { get; set; }
+        public Nullable<int> MaKH_THUEKO { get; set; }
+        public Nullable<int> MaKH_DATQC { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHopDong> ChiTietHopDongs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HoaDon> HoaDons { get; set; }
+        public virtual ICollection<DotKhuyenMai> DotKhuyenMais { get; set; }
+        public virtual LoaiHopDong LoaiHopDong { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LanNap> LanNaps { get; set; }
+        public virtual ICollection<MatHang> MatHangs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BuoiAn> BuoiAns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoaiMatHang> LoaiMatHangs { get; set; }
     }
 }

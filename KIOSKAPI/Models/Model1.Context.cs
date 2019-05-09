@@ -12,6 +12,8 @@ namespace KIOSKAPI.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class QLKIOSKEntities : DbContext
     {
@@ -25,6 +27,60 @@ namespace KIOSKAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BuoiAn> BuoiAns { get; set; }
+        public virtual DbSet<ChiTietBA_MH> ChiTietBA_MH { get; set; }
+        public virtual DbSet<ChiTietGiamGiaTheoSL> ChiTietGiamGiaTheoSLs { get; set; }
+        public virtual DbSet<ChiTietHopDong> ChiTietHopDongs { get; set; }
+        public virtual DbSet<ChiTietNap> ChiTietNaps { get; set; }
+        public virtual DbSet<CTHD> CTHDs { get; set; }
+        public virtual DbSet<DonVi_MatHang> DonVi_MatHang { get; set; }
+        public virtual DbSet<DotKhuyenMai> DotKhuyenMais { get; set; }
+        public virtual DbSet<HinhThuc_ThanhToan> HinhThuc_ThanhToan { get; set; }
+        public virtual DbSet<HoaDon> HoaDons { get; set; }
+        public virtual DbSet<HopDong> HopDongs { get; set; }
+        public virtual DbSet<LanNap> LanNaps { get; set; }
+        public virtual DbSet<LoaiHopDong> LoaiHopDongs { get; set; }
+        public virtual DbSet<LoaiMatHang> LoaiMatHangs { get; set; }
+        public virtual DbSet<LoaiTien> LoaiTiens { get; set; }
+        public virtual DbSet<MatHang> MatHangs { get; set; }
         public virtual DbSet<KIOSK> KIOSKs { get; set; }
+        public virtual DbSet<v_api_LoaiMatHang> v_api_LoaiMatHang { get; set; }
+        public virtual DbSet<v_api_BuoiAn> v_api_BuoiAn { get; set; }
+        public virtual DbSet<v_api_MatHang> v_api_MatHang { get; set; }
+    
+        public virtual ObjectResult<sp_api_getLoaiMatHang_Result> sp_api_getLoaiMatHang(string makiosk)
+        {
+            var makioskParameter = makiosk != null ?
+                new ObjectParameter("makiosk", makiosk) :
+                new ObjectParameter("makiosk", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_api_getLoaiMatHang_Result>("sp_api_getLoaiMatHang", makioskParameter);
+        }
+    
+        public virtual ObjectResult<sp_api_getBuoiAn_Result> sp_api_getBuoiAn(string makiosk)
+        {
+            var makioskParameter = makiosk != null ?
+                new ObjectParameter("makiosk", makiosk) :
+                new ObjectParameter("makiosk", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_api_getBuoiAn_Result>("sp_api_getBuoiAn", makioskParameter);
+        }
+    
+        public virtual ObjectResult<sp_api_getMatHang_Result> sp_api_getMatHang(string makiosk, Nullable<int> malmh, Nullable<int> maba)
+        {
+            var makioskParameter = makiosk != null ?
+                new ObjectParameter("makiosk", makiosk) :
+                new ObjectParameter("makiosk", typeof(string));
+    
+            var malmhParameter = malmh.HasValue ?
+                new ObjectParameter("malmh", malmh) :
+                new ObjectParameter("malmh", typeof(int));
+    
+            var mabaParameter = maba.HasValue ?
+                new ObjectParameter("maba", maba) :
+                new ObjectParameter("maba", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_api_getMatHang_Result>("sp_api_getMatHang", makioskParameter, malmhParameter, mabaParameter);
+        }
     }
 }
