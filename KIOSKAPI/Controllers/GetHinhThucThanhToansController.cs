@@ -1,48 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Web.Http;
-using System.Web.Http.Description;
 using KIOSKAPI.Models;
 
 namespace KIOSKAPI.Controllers
 {
-    public class ClearTokenController : ApiController
+    public class GetHinhThucThanhToansController : ApiController
     {
         private QLKIOSKEntities db = new QLKIOSKEntities();
 
-        // GET: api/ClearToken/
+        // GET: api/GetHinhThucThanhToans/
         /// <summary>
-        /// Xóa token
+        /// Lấy danh sách hình thức thanh toán
         /// </summary>
         /// <param name="token">token</param>
-        /// <param name="makiosk">kiosk</param>
-        /// <returns></returns>
+        /// <param name="makiosk">makiosk</param>
+        /// <returns>v_api_HinhThucThanhToan</returns>
+
         [AllowAnonymous]
-        public IHttpActionResult ClearToken(string token, string makiosk)
+        public IHttpActionResult GetHinhThucThanhToans(string token, string makiosk)
         {
-            if (ValidateRequest.IsValid(token, makiosk))
+            List<v_api_HinhThucThanhToan> hinhThucThanhToans = new List<v_api_HinhThucThanhToan>();
+
+            if (!ValidateRequest.IsValid(token, makiosk))
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
             try
             {
-                KIOSK k = db.KIOSKs.SingleOrDefault(x => x.MAKO.Equals(makiosk));
-
-                if (k != null && ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
-                    k.MaToken = null;
-
-                    db.SaveChanges();
-                    return Ok();
+                    hinhThucThanhToans = db.v_api_HinhThucThanhToan.ToList();
+                    return Ok(hinhThucThanhToans);
                 }
             }
             catch (Exception ex)

@@ -42,11 +42,15 @@ namespace KIOSKAPI.Models
         public virtual DbSet<LoaiHopDong> LoaiHopDongs { get; set; }
         public virtual DbSet<LoaiMatHang> LoaiMatHangs { get; set; }
         public virtual DbSet<LoaiTien> LoaiTiens { get; set; }
-        public virtual DbSet<MatHang> MatHangs { get; set; }
-        public virtual DbSet<KIOSK> KIOSKs { get; set; }
         public virtual DbSet<v_api_LoaiMatHang> v_api_LoaiMatHang { get; set; }
         public virtual DbSet<v_api_BuoiAn> v_api_BuoiAn { get; set; }
         public virtual DbSet<v_api_MatHang> v_api_MatHang { get; set; }
+        public virtual DbSet<KIOSK> KIOSKs { get; set; }
+        public virtual DbSet<MatHang> MatHangs { get; set; }
+        public virtual DbSet<v_HinhThucThanhToan> v_HinhThucThanhToan { get; set; }
+        public virtual DbSet<v_api_HinhThucThanhToan> v_api_HinhThucThanhToan { get; set; }
+        public virtual DbSet<v_api_DotKhuyenMai> v_api_DotKhuyenMai { get; set; }
+        public virtual DbSet<v_api_ChiTietGiamGiaTheoSL> v_api_ChiTietGiamGiaTheoSL { get; set; }
     
         public virtual ObjectResult<sp_api_getLoaiMatHang_Result> sp_api_getLoaiMatHang(string makiosk)
         {
@@ -81,6 +85,49 @@ namespace KIOSKAPI.Models
                 new ObjectParameter("maba", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_api_getMatHang_Result>("sp_api_getMatHang", makioskParameter, malmhParameter, mabaParameter);
+        }
+    
+        public virtual ObjectResult<sp_api_getDotKhuyenMai_Result> sp_api_getDotKhuyenMai(string makiosk)
+        {
+            var makioskParameter = makiosk != null ?
+                new ObjectParameter("makiosk", makiosk) :
+                new ObjectParameter("makiosk", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_api_getDotKhuyenMai_Result>("sp_api_getDotKhuyenMai", makioskParameter);
+        }
+    
+        public virtual ObjectResult<sp_api_getChiTietGiamGiaTheoSL_Result> sp_api_getChiTietGiamGiaTheoSL(Nullable<int> makm)
+        {
+            var makmParameter = makm.HasValue ?
+                new ObjectParameter("makm", makm) :
+                new ObjectParameter("makm", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_api_getChiTietGiamGiaTheoSL_Result>("sp_api_getChiTietGiamGiaTheoSL", makmParameter);
+        }
+    
+        public virtual int sp_LapHoaDon(Nullable<System.DateTime> ngaylap, Nullable<System.TimeSpan> giolap, string massc, string mako, Nullable<int> mahttt)
+        {
+            var ngaylapParameter = ngaylap.HasValue ?
+                new ObjectParameter("ngaylap", ngaylap) :
+                new ObjectParameter("ngaylap", typeof(System.DateTime));
+    
+            var giolapParameter = giolap.HasValue ?
+                new ObjectParameter("giolap", giolap) :
+                new ObjectParameter("giolap", typeof(System.TimeSpan));
+    
+            var masscParameter = massc != null ?
+                new ObjectParameter("massc", massc) :
+                new ObjectParameter("massc", typeof(string));
+    
+            var makoParameter = mako != null ?
+                new ObjectParameter("mako", mako) :
+                new ObjectParameter("mako", typeof(string));
+    
+            var mahtttParameter = mahttt.HasValue ?
+                new ObjectParameter("mahttt", mahttt) :
+                new ObjectParameter("mahttt", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_LapHoaDon", ngaylapParameter, giolapParameter, masscParameter, makoParameter, mahtttParameter);
         }
     }
 }

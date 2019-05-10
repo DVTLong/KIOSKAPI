@@ -28,7 +28,6 @@ namespace KIOSKAPI.Models
         public Nullable<decimal> DonGia { get; set; }
         public int MaDV { get; set; }
         public bool TrangThai { get; set; }
-        public int SoHD { get; set; }
         public byte[] ImageMH { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
     
@@ -39,6 +38,5 @@ namespace KIOSKAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHD> CTHDs { get; set; }
         public virtual DonVi_MatHang DonVi_MatHang { get; set; }
-        public virtual HopDong HopDong { get; set; }
     }
 }

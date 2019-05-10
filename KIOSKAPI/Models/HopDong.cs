@@ -19,7 +19,6 @@ namespace KIOSKAPI.Models
         {
             this.ChiTietHopDongs = new HashSet<ChiTietHopDong>();
             this.DotKhuyenMais = new HashSet<DotKhuyenMai>();
-            this.MatHangs = new HashSet<MatHang>();
             this.BuoiAns = new HashSet<BuoiAn>();
             this.LoaiMatHangs = new HashSet<LoaiMatHang>();
         }
@@ -37,8 +36,6 @@ namespace KIOSKAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DotKhuyenMai> DotKhuyenMais { get; set; }
         public virtual LoaiHopDong LoaiHopDong { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MatHang> MatHangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BuoiAn> BuoiAns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFrameworkExtras.EF6, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFrameworkExtras.EF6.1.0.0\lib\net45\EntityFrameworkExtras.EF6.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -207,12 +210,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ClearAllTokensController.cs" />
     <Compile Include="Controllers\ClearTokenController.cs" />
     <Compile Include="Controllers\GetBuoiAnsController.cs" />
+    <Compile Include="Controllers\GetDotKhuyenMaisController.cs" />
+    <Compile Include="Controllers\GetHinhThucThanhToansController.cs" />
     <Compile Include="Controllers\GetLoaiMatHangsController.cs" />
     <Compile Include="Controllers\GetMatHangsController.cs" />
+    <Compile Include="Controllers\GetChiTietGiamGiaTheoSLsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostLapHoaDonController.cs" />
     <Compile Include="Controllers\ValidateRequest.cs" />
     <Compile Include="Models\BuoiAn.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -232,6 +238,7 @@
     <Compile Include="Models\CTHD.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CTHDTableType.cs" />
     <Compile Include="Models\DonVi_MatHang.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -250,6 +257,7 @@
     <Compile Include="Models\LanNap.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LapHoaDonRequestCollection.cs" />
     <Compile Include="Models\LoaiHopDong.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -265,19 +273,38 @@
     <Compile Include="Models\sp_api_getBuoiAn_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_api_getChiTietGiamGiaTheoSL_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_api_getDotKhuyenMai_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_api_getLoaiMatHang_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_api_getMatHang_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_LapHoaDon.cs" />
     <Compile Include="Models\v_api_BuoiAn.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\v_api_ChiTietGiamGiaTheoSL.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\v_api_DotKhuyenMai.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\v_api_HinhThucThanhToan.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\v_api_LoaiMatHang.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\v_api_MatHang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\v_HinhThucThanhToan.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="RequireHttpsAttribute.cs" />

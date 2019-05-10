@@ -44,6 +44,9 @@
         <AssociationConnector Association="QLKIOSKModel.MatHang_FK_MaDV" />
         <AssociationConnector Association="QLKIOSKModel.HoaDon_FK_MaKO" />
         <AssociationConnector Association="QLKIOSKModel.LanNap_FK_MaKO" />
+        <EntityTypeShape EntityType="QLKIOSKModel.v_api_HinhThucThanhToan" Width="1.5" PointX="13.375" PointY="3.75" />
+        <EntityTypeShape EntityType="QLKIOSKModel.v_api_DotKhuyenMai" Width="1.5" PointX="13.375" PointY="6.75" />
+        <EntityTypeShape EntityType="QLKIOSKModel.v_api_ChiTietGiamGiaTheoSL" Width="1.5" PointX="12.375" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

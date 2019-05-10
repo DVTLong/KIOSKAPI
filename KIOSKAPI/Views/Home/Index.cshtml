@@ -11,28 +11,58 @@
         </thead>
         <tbody>
             <tr>
-                <td>GetToken</td>
+                <td><a href="/api/GetToken?apikey=4d60b161721d342799aeda009f2db16a&makiosk=kiosk1" target="_blank">GetToken</a></td>
                 <td>Cấp token cho 1 kiosk</td>
-                <td>/api/GetToken</td>
-                <td>apikey, mako</td>
+                <td>@("/api/GetToken?apikey=<apikey>&makiosk=<makiosk>")</td>
+                <td></td>
             </tr>
             <tr>
-                <td>ClearToken</td>
+                <td><a href="/api/ClearToken?token=AE4AFE0A6479BBF5BAE0B44921C8EFDC&makiosk=kiosk1" target="_blank">ClearToken</a></td>
                 <td>Xóa token của 1 kiosk</td>
-                <td>/api/ClearToken</td>
-                <td>mako, matoken</td>
+                <td>@("/api/ClearToken?token=<token>&makiosk=<makiosk>")</td>
+                <td></td>
             </tr>
             <tr>
-                <td>ClearAllTokens</td>
-                <td>Xóa tất cả token</td>
-                <td>/api/ClearAllTokens</td>
-                <td>password</td>
+                <td><a href="/api/GetLoaiMatHangs?token=AE4AFE0A6479BBF5BAE0B44921C8EFDC&makiosk=kiosk1" target="_blank">GetLoaiMatHangs</a></td>
+                <td>Lấy danh sách loại mặt hàng</td>
+                <td>@("/api/GetLoaiMatHangs?token=<token>&makiosk=<makiosk>")</td>
+                <td></td>
             </tr>
             <tr>
-                <td>CheckKIOSK</td>
-                <td>Xác thực KIOSK</td>
-                <td>/api/CheckKIOSK</td>
-                <td>mako, matoken</td>
+                <td><a href="/api/GetBuoiAns?token=AE4AFE0A6479BBF5BAE0B44921C8EFDC&makiosk=kiosk1" target="_blank">GetBuoiAns</a></td>
+                <td>Lấy danh sách buổi ăn</td>
+                <td>@("/api/GetBuoiAns?token=<token>&makiosk=<makiosk>")</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="/api/GetMatHangs?token=AE4AFE0A6479BBF5BAE0B44921C8EFDC&makiosk=kiosk1&malmh=2&maba=1" target="_blank">GetMatHangs</a></td>
+                <td>Lấy danh sách mặt hàng thuộc loại mặt hàng, buổi ăn</td>
+                <td>@("/api/GetMatHangs?token=<token>&makiosk=<makiosk>&malmh=<malmh>&maba=<maba>")</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="/api/GetHinhThucThanhToans?token=AE4AFE0A6479BBF5BAE0B44921C8EFDC&makiosk=kiosk1" target="_blank">GetHinhThucThanhToans</a></td>
+                <td>Lấy danh sách hình thức thanh toán</td>
+                <td>@("/api/GetHinhThucThanhToans?token=<token>&makiosk=<makiosk>")</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="/api/GetDotKhuyenMais?token=AE4AFE0A6479BBF5BAE0B44921C8EFDC&makiosk=kiosk1" target="_blank">GetDotKhuyenMais</a></td>
+                <td>Lấy danh sách các đợt khuyến mãi hiện tại</td>
+                <td>@("/api/GetDotKhuyenMais?token=<token>&makiosk=<makiosk>")</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><a href="/api/GetChiTietGiamGiaTheoSLs?token=AE4AFE0A6479BBF5BAE0B44921C8EFDC&makiosk=kiosk1&makm=1" target="_blank">GetChiTietGiamGiaTheoSLs</a></td>
+                <td>Lấy danh sách chi tiết giảm giá theo số lượng mua mặt hàng</td>
+                <td>@("/api/GetChiTietGiamGiaTheoSLs?token=<token>&makiosk=<makiosk>&makm=<makm>")</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>PostLapHoaDon</td>
+                <td>Lập hóa đơn</td>
+                <td>@("/api/PostLapHoaDon")</td>
+                <td>LapHoaDonRequestCollection</td>
             </tr>
         </tbody>
     </table>

@@ -204,6 +204,50 @@ warning 6002: The table/view 'QLKIOSK.dbo.v_api_BuoiAn' does not have a primary 
           <Property Name="SoHD" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'QLKIOSK.dbo.v_api_ChiTietGiamGiaTheoSL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_api_ChiTietGiamGiaTheoSL">
+          <Key>
+            <PropertyRef Name="STT" />
+            <PropertyRef Name="MaKM" />
+            <PropertyRef Name="MaMH" />
+            <PropertyRef Name="TrangThai" />
+            <PropertyRef Name="SLMuaToiThieu" />
+            <PropertyRef Name="Giam" />
+          </Key>
+          <Property Name="STT" Type="int" Nullable="false" />
+          <Property Name="MaKM" Type="int" Nullable="false" />
+          <Property Name="MaMH" Type="int" Nullable="false" />
+          <Property Name="DonGia" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="TrangThai" Type="bit" Nullable="false" />
+          <Property Name="SLMuaToiThieu" Type="int" Nullable="false" />
+          <Property Name="Giam" Type="decimal" Precision="6" Scale="4" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLKIOSK.dbo.v_api_DotKhuyenMai' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_api_DotKhuyenMai">
+          <Key>
+            <PropertyRef Name="MaKM" />
+            <PropertyRef Name="NgayTao" />
+            <PropertyRef Name="NgayBD" />
+            <PropertyRef Name="NgayKT" />
+            <PropertyRef Name="SoHD" />
+          </Key>
+          <Property Name="MaKM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayTao" Type="date" Nullable="false" />
+          <Property Name="NgayBD" Type="date" Nullable="false" />
+          <Property Name="NgayKT" Type="date" Nullable="false" />
+          <Property Name="SoHD" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLKIOSK.dbo.v_api_HinhThucThanhToan' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_api_HinhThucThanhToan">
+          <Key>
+            <PropertyRef Name="MaHTTT" />
+          </Key>
+          <Property Name="MaHTTT" Type="int" Nullable="false" />
+          <Property Name="TenHTTT" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'QLKIOSK.dbo.v_api_LoaiMatHang' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="v_api_LoaiMatHang">
           <Key>
@@ -466,6 +510,12 @@ warning 6002: The table/view 'QLKIOSK.dbo.v_api_MatHang' does not have a primary
         <Function Name="sp_api_getBuoiAn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="makiosk" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_api_getChiTietGiamGiaTheoSL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="makm" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_api_getDotKhuyenMai" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="makiosk" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_api_getLoaiMatHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="makiosk" Type="varchar" Mode="In" />
         </Function>
@@ -473,6 +523,13 @@ warning 6002: The table/view 'QLKIOSK.dbo.v_api_MatHang' does not have a primary
           <Parameter Name="makiosk" Type="varchar" Mode="In" />
           <Parameter Name="malmh" Type="int" Mode="In" />
           <Parameter Name="maba" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LapHoaDon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ngaylap" Type="date" Mode="In" />
+          <Parameter Name="giolap" Type="time" Mode="In" />
+          <Parameter Name="massc" Type="varchar" Mode="In" />
+          <Parameter Name="mako" Type="varchar" Mode="In" />
+          <Parameter Name="mahttt" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="QLKIOSKModelStoreContainer">
           <EntitySet Name="BuoiAn" EntityType="Self.BuoiAn" Schema="dbo" store:Type="Tables" />
@@ -500,6 +557,32 @@ warning 6002: The table/view 'QLKIOSK.dbo.v_api_MatHang' does not have a primary
     [v_api_BuoiAn].[GioKT] AS [GioKT], 
     [v_api_BuoiAn].[SoHD] AS [SoHD]
     FROM [dbo].[v_api_BuoiAn] AS [v_api_BuoiAn]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_api_ChiTietGiamGiaTheoSL" EntityType="Self.v_api_ChiTietGiamGiaTheoSL" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_api_ChiTietGiamGiaTheoSL].[STT] AS [STT], 
+    [v_api_ChiTietGiamGiaTheoSL].[MaKM] AS [MaKM], 
+    [v_api_ChiTietGiamGiaTheoSL].[MaMH] AS [MaMH], 
+    [v_api_ChiTietGiamGiaTheoSL].[DonGia] AS [DonGia], 
+    [v_api_ChiTietGiamGiaTheoSL].[TrangThai] AS [TrangThai], 
+    [v_api_ChiTietGiamGiaTheoSL].[SLMuaToiThieu] AS [SLMuaToiThieu], 
+    [v_api_ChiTietGiamGiaTheoSL].[Giam] AS [Giam]
+    FROM [dbo].[v_api_ChiTietGiamGiaTheoSL] AS [v_api_ChiTietGiamGiaTheoSL]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_api_DotKhuyenMai" EntityType="Self.v_api_DotKhuyenMai" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_api_DotKhuyenMai].[MaKM] AS [MaKM], 
+    [v_api_DotKhuyenMai].[NgayTao] AS [NgayTao], 
+    [v_api_DotKhuyenMai].[NgayBD] AS [NgayBD], 
+    [v_api_DotKhuyenMai].[NgayKT] AS [NgayKT], 
+    [v_api_DotKhuyenMai].[SoHD] AS [SoHD]
+    FROM [dbo].[v_api_DotKhuyenMai] AS [v_api_DotKhuyenMai]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_api_HinhThucThanhToan" EntityType="Self.v_api_HinhThucThanhToan" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_api_HinhThucThanhToan].[MaHTTT] AS [MaHTTT], 
+    [v_api_HinhThucThanhToan].[TenHTTT] AS [TenHTTT]
+    FROM [dbo].[v_api_HinhThucThanhToan] AS [v_api_HinhThucThanhToan]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="v_api_LoaiMatHang" EntityType="Self.v_api_LoaiMatHang" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -713,6 +796,22 @@ warning 6002: The table/view 'QLKIOSK.dbo.v_api_MatHang' does not have a primary
             <End Role="KIOSK" EntitySet="KIOSKs" />
             <End Role="LanNap" EntitySet="LanNaps" />
           </AssociationSet>
+          <EntitySet Name="v_api_HinhThucThanhToan" EntityType="QLKIOSKModel.v_api_HinhThucThanhToan" />
+          <EntitySet Name="v_api_DotKhuyenMai" EntityType="QLKIOSKModel.v_api_DotKhuyenMai" />
+          <FunctionImport Name="sp_api_getDotKhuyenMai" ReturnType="Collection(QLKIOSKModel.sp_api_getDotKhuyenMai_Result)">
+          <Parameter Name="makiosk" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="v_api_ChiTietGiamGiaTheoSL" EntityType="QLKIOSKModel.v_api_ChiTietGiamGiaTheoSL" />
+          <FunctionImport Name="sp_api_getChiTietGiamGiaTheoSL" ReturnType="Collection(QLKIOSKModel.sp_api_getChiTietGiamGiaTheoSL_Result)">
+          <Parameter Name="makm" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LapHoaDon">
+            <Parameter Name="ngaylap" Mode="In" Type="DateTime" />
+            <Parameter Name="giolap" Mode="In" Type="Time" />
+            <Parameter Name="massc" Mode="In" Type="String" />
+            <Parameter Name="mako" Mode="In" Type="String" />
+            <Parameter Name="mahttt" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="BuoiAn">
           <Key>
@@ -1230,6 +1329,60 @@ warning 6002: The table/view 'QLKIOSK.dbo.v_api_MatHang' does not have a primary
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="v_api_HinhThucThanhToan">
+          <Key>
+            <PropertyRef Name="MaHTTT" />
+          </Key>
+          <Property Name="MaHTTT" Type="Int32" Nullable="false" />
+          <Property Name="TenHTTT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="v_api_DotKhuyenMai">
+          <Key>
+            <PropertyRef Name="MaKM" />
+            <PropertyRef Name="NgayTao" />
+            <PropertyRef Name="NgayBD" />
+            <PropertyRef Name="NgayKT" />
+            <PropertyRef Name="SoHD" />
+          </Key>
+          <Property Name="MaKM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NgayBD" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NgayKT" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SoHD" Type="Int32" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="sp_api_getDotKhuyenMai_Result">
+          <Property Type="Int32" Name="MaKM" Nullable="false" />
+          <Property Type="DateTime" Name="NgayTao" Nullable="false" />
+          <Property Type="DateTime" Name="NgayBD" Nullable="false" />
+          <Property Type="DateTime" Name="NgayKT" Nullable="false" />
+          <Property Type="Int32" Name="SoHD" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="v_api_ChiTietGiamGiaTheoSL">
+          <Key>
+            <PropertyRef Name="STT" />
+            <PropertyRef Name="MaKM" />
+            <PropertyRef Name="MaMH" />
+            <PropertyRef Name="TrangThai" />
+            <PropertyRef Name="SLMuaToiThieu" />
+            <PropertyRef Name="Giam" />
+          </Key>
+          <Property Name="STT" Type="Int32" Nullable="false" />
+          <Property Name="MaKM" Type="Int32" Nullable="false" />
+          <Property Name="MaMH" Type="Int32" Nullable="false" />
+          <Property Name="DonGia" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="TrangThai" Type="Boolean" Nullable="false" />
+          <Property Name="SLMuaToiThieu" Type="Int32" Nullable="false" />
+          <Property Name="Giam" Type="Decimal" Nullable="false" Precision="6" Scale="4" />
+        </EntityType>
+        <ComplexType Name="sp_api_getChiTietGiamGiaTheoSL_Result">
+          <Property Type="Int32" Name="STT" Nullable="false" />
+          <Property Type="Int32" Name="MaKM" Nullable="false" />
+          <Property Type="Int32" Name="MaMH" Nullable="false" />
+          <Property Type="Decimal" Name="DonGia" Nullable="true" Precision="10" Scale="0" />
+          <Property Type="Boolean" Name="TrangThai" Nullable="false" />
+          <Property Type="Int32" Name="SLMuaToiThieu" Nullable="false" />
+          <Property Type="Decimal" Name="Giam" Nullable="false" Precision="6" Scale="4" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1511,6 +1664,63 @@ warning 6002: The table/view 'QLKIOSK.dbo.v_api_MatHang' does not have a primary
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="v_api_HinhThucThanhToan">
+            <EntityTypeMapping TypeName="QLKIOSKModel.v_api_HinhThucThanhToan">
+              <MappingFragment StoreEntitySet="v_api_HinhThucThanhToan">
+                <ScalarProperty Name="TenHTTT" ColumnName="TenHTTT" />
+                <ScalarProperty Name="MaHTTT" ColumnName="MaHTTT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_api_DotKhuyenMai">
+            <EntityTypeMapping TypeName="QLKIOSKModel.v_api_DotKhuyenMai">
+              <MappingFragment StoreEntitySet="v_api_DotKhuyenMai">
+                <ScalarProperty Name="SoHD" ColumnName="SoHD" />
+                <ScalarProperty Name="NgayKT" ColumnName="NgayKT" />
+                <ScalarProperty Name="NgayBD" ColumnName="NgayBD" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="MaKM" ColumnName="MaKM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_api_getDotKhuyenMai" FunctionName="QLKIOSKModel.Store.sp_api_getDotKhuyenMai">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLKIOSKModel.sp_api_getDotKhuyenMai_Result">
+                <ScalarProperty Name="MaKM" ColumnName="MaKM" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="NgayBD" ColumnName="NgayBD" />
+                <ScalarProperty Name="NgayKT" ColumnName="NgayKT" />
+                <ScalarProperty Name="SoHD" ColumnName="SoHD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="v_api_ChiTietGiamGiaTheoSL">
+            <EntityTypeMapping TypeName="QLKIOSKModel.v_api_ChiTietGiamGiaTheoSL">
+              <MappingFragment StoreEntitySet="v_api_ChiTietGiamGiaTheoSL">
+                <ScalarProperty Name="Giam" ColumnName="Giam" />
+                <ScalarProperty Name="SLMuaToiThieu" ColumnName="SLMuaToiThieu" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="MaMH" ColumnName="MaMH" />
+                <ScalarProperty Name="MaKM" ColumnName="MaKM" />
+                <ScalarProperty Name="STT" ColumnName="STT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_api_getChiTietGiamGiaTheoSL" FunctionName="QLKIOSKModel.Store.sp_api_getChiTietGiamGiaTheoSL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLKIOSKModel.sp_api_getChiTietGiamGiaTheoSL_Result">
+                <ScalarProperty Name="STT" ColumnName="STT" />
+                <ScalarProperty Name="MaKM" ColumnName="MaKM" />
+                <ScalarProperty Name="MaMH" ColumnName="MaMH" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="SLMuaToiThieu" ColumnName="SLMuaToiThieu" />
+                <ScalarProperty Name="Giam" ColumnName="Giam" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_LapHoaDon" FunctionName="QLKIOSKModel.Store.sp_LapHoaDon" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
