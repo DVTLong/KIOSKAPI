@@ -12,14 +12,15 @@ namespace KIOSKAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChiTietNap
+    public partial class v_api_QuangCao
     {
-        public int STT { get; set; }
-        public string MaLT { get; set; }
-        public int SoLuongTo { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
-    
-        public virtual LoaiTien LoaiTien { get; set; }
-        public virtual LanNap LanNap { get; set; }
+        public int SoHD { get; set; }
+        public string MAKO { get; set; }
+        public int MaQC { get; set; }
+        public System.DateTime NgayBDQC { get; set; }
+        public System.DateTime NgayKTQC { get; set; }
+        public string NoiDung { get; set; }
+        public byte[] ImageQC { get; set; }
+        public int ThoiLuong { get; set; }
     }
 }

@@ -10,7 +10,6 @@ namespace KIOSKAPI.Controllers
 {
     public class GetLoaiMatHangsController : ApiController
     {
-        private QLKIOSKEntities db = new QLKIOSKEntities();
 
         // GET: api/GetLoaiMatHangs/
         /// <summary>
@@ -29,6 +28,8 @@ namespace KIOSKAPI.Controllers
             {
                 return Unauthorized();
             }
+
+            QLKIOSKClientEntities db = ClientDBInstance.GetDBInstance(makiosk);
 
             try
             {               
@@ -57,14 +58,6 @@ namespace KIOSKAPI.Controllers
             return BadRequest();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
     }
 }

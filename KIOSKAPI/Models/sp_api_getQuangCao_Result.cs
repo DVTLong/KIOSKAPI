@@ -10,17 +10,16 @@
 namespace KIOSKAPI.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ChiTietHopDong
+    public partial class sp_api_getQuangCao_Result
     {
         public int SoHD { get; set; }
         public string MAKO { get; set; }
-        public System.DateTime NgayBDThue { get; set; }
-        public System.DateTime NgayKetThuc { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
-    
-        public virtual HopDong HopDong { get; set; }
-        public virtual KIOSK KIOSK { get; set; }
+        public int MaQC { get; set; }
+        public System.DateTime NgayBDQC { get; set; }
+        public System.DateTime NgayKTQC { get; set; }
+        public string NoiDung { get; set; }
+        public byte[] ImageQC { get; set; }
+        public int ThoiLuong { get; set; }
     }
 }

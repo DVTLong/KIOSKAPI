@@ -10,7 +10,7 @@ using KIOSKAPI.Models;
 
 namespace KIOSKAPI.Controllers
 {
-    public class PostLapHoaDonController : ApiController
+    public class PostNapTienController : ApiController
     {
         // POST: api/PostLapHoaDon/
         /// <summary>
@@ -21,7 +21,7 @@ namespace KIOSKAPI.Controllers
 
         [System.Web.Mvc.AllowAnonymous]
         [System.Web.Mvc.HttpPost]
-        public IHttpActionResult PostLapHoaDon(LapHoaDonRequestCollection r)
+        public IHttpActionResult PostNapTien(NapTienRequestCollection r)
         {
             string token = r.Token;
             string makiosk = r.MaKIOSK;
@@ -34,22 +34,20 @@ namespace KIOSKAPI.Controllers
             QLKIOSKClientEntities db = ClientDBInstance.GetDBInstance(makiosk);
 
             string maSSC = r.MaSSC;
-            int maHTTT = Convert.ToInt32(r.MaHTTT);
-            List<CTHDTableType> cthd = r.CTHDTableType;
-                                               
+            List<ChiTietNapTableType> ctnt = r.ChiTietNapTableType;
+
 
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var proc = new SP_LapHoaDon()
+                    var proc = new sp_NapTien()
                     {
-                        NgayLap = DateTime.Now,
-                        GioLap = DateTime.Now.TimeOfDay,
+                        NgayNap = DateTime.Now,
+                        GioNap = DateTime.Now.TimeOfDay,
                         MaSSC = maSSC,
                         MaKO = makiosk,
-                        MaHTTT = maHTTT,
-                        CTHDTableTypes = cthd
+                        ChiTietNapTableType = ctnt
                     };
 
                     db.Database.ExecuteStoredProcedure(proc);

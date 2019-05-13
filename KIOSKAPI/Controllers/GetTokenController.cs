@@ -16,10 +16,6 @@ namespace KIOSKAPI.Controllers
 {
     public class GetTokenController : ApiController
     {
-        private QLKIOSKEntities db = new QLKIOSKEntities();
-
-
-
         // GET: api/GetToken/
         /// <summary>
         /// Generate new token for kiosk
@@ -33,51 +29,42 @@ namespace KIOSKAPI.Controllers
             if (apikey == null || makiosk == null)
             {
                 return BadRequest("Null parameters");
-            }
+            }            
 
             string token = string.Empty;
-            string stored_apikey = ConfigurationManager.AppSettings["apikey"].ToString();
-            if (!apikey.Equals(stored_apikey))
+            if (!ValidateRequest.APIKeyIsValid(apikey))
             {
                 return Unauthorized();
             }
 
-            KIOSK kIOSK = db.KIOSKs.SingleOrDefault(x=>x.MAKO.Equals(makiosk));
-            if (kIOSK == null)
-            {
-                return NotFound();
-            }
-
-            
+            QLKIOSKEntities db = new QLKIOSKEntities();
 
             try
             {
+                v_kiosk_constr kIOSK = db.v_kiosk_constr.SingleOrDefault(x => x.MAKO.Equals(makiosk));
+                if (kIOSK == null)
+                {
+                    return NotFound();
+                }
+
+
                 token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
                 token = MD5Gen.CreateMD5(token);
 
                 if (ModelState.IsValid)
                 {
-                    kIOSK.MaToken = token;
-                    db.SaveChanges();
+                    db.sp_api_SetToken(makiosk, token);
                     return Ok(token);
                 }
             }
             catch (Exception ex)
             {
-                
+
                 return InternalServerError(ex);
             }
 
             return BadRequest();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

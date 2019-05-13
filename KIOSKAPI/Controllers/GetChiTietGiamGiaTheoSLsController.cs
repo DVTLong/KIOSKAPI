@@ -10,8 +10,6 @@ namespace KIOSKAPI.Controllers
 {
     public class GetChiTietGiamGiaTheoSLsController : ApiController
     {
-        private QLKIOSKEntities db = new QLKIOSKEntities();
-
         // GET: api/GetChiTietGiamGiaTheoSL/
         /// <summary>
         /// Lấy danh sách chi tiết giảm giá theo số lượng
@@ -30,6 +28,8 @@ namespace KIOSKAPI.Controllers
             {
                 return Unauthorized();
             }
+
+            QLKIOSKClientEntities db = ClientDBInstance.GetDBInstance(makiosk);
 
             try
             {
@@ -61,13 +61,5 @@ namespace KIOSKAPI.Controllers
             return BadRequest();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

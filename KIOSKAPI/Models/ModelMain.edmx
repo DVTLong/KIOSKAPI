@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QLKIOSKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLKIOSK.dbo.v_kiosk_constr' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_kiosk_constr">
+          <Key>
+            <PropertyRef Name="MAKO" />
+          </Key>
+          <Property Name="MAKO" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="MaToken" Type="varchar" MaxLength="128" />
+          <Property Name="ConnectStr" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Function Name="sp_api_SetToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="makiosk" Type="varchar" Mode="In" />
+          <Parameter Name="token" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="QLKIOSKModelStoreContainer">
+          <EntitySet Name="v_kiosk_constr" EntityType="Self.v_kiosk_constr" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_kiosk_constr].[MAKO] AS [MAKO], 
+    [v_kiosk_constr].[MaToken] AS [MaToken], 
+    [v_kiosk_constr].[ConnectStr] AS [ConnectStr]
+    FROM [dbo].[v_kiosk_constr] AS [v_kiosk_constr]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLKIOSKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="v_kiosk_constr">
+          <Key>
+            <PropertyRef Name="MAKO" />
+          </Key>
+          <Property Name="MAKO" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConnectStr" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MaToken" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="QLKIOSKEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="v_kiosk_constr" EntityType="Self.v_kiosk_constr" />
+          <FunctionImport Name="sp_api_SetToken">
+            <Parameter Name="makiosk" Mode="In" Type="String" />
+            <Parameter Name="token" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLKIOSKModelStoreContainer" CdmEntityContainer="QLKIOSKEntities">
+          <EntitySetMapping Name="v_kiosk_constr">
+            <EntityTypeMapping TypeName="QLKIOSKModel.v_kiosk_constr">
+              <MappingFragment StoreEntitySet="v_kiosk_constr">
+                <ScalarProperty Name="MaToken" ColumnName="MaToken" />
+                <ScalarProperty Name="MAKO" ColumnName="MAKO" />
+                <ScalarProperty Name="ConnectStr" ColumnName="ConnectStr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_api_SetToken" FunctionName="QLKIOSKModel.Store.sp_api_SetToken" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

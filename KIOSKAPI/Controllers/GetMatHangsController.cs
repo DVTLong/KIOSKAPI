@@ -10,8 +10,6 @@ namespace KIOSKAPI.Controllers
 {
     public class GetMatHangsController : ApiController
     {
-        private QLKIOSKEntities db = new QLKIOSKEntities();
-
         // GET: api/GetMatHangs/
         /// <summary>
         /// Lấy danh sách mặt hàng
@@ -31,6 +29,8 @@ namespace KIOSKAPI.Controllers
             {
                 return Unauthorized();
             }
+
+            QLKIOSKClientEntities db = ClientDBInstance.GetDBInstance(makiosk);
 
             try
             {
@@ -66,13 +66,5 @@ namespace KIOSKAPI.Controllers
             return BadRequest();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

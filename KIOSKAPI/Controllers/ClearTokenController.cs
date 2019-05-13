@@ -16,7 +16,6 @@ namespace KIOSKAPI.Controllers
 {
     public class ClearTokenController : ApiController
     {
-        private QLKIOSKEntities db = new QLKIOSKEntities();
 
         // GET: api/ClearToken/
         /// <summary>
@@ -26,22 +25,23 @@ namespace KIOSKAPI.Controllers
         /// <param name="makiosk">kiosk</param>
         /// <returns></returns>
         [AllowAnonymous]
+        [HttpGet]
         public IHttpActionResult ClearToken(string token, string makiosk)
         {
-            if (ValidateRequest.IsValid(token, makiosk))
+            if (!ValidateRequest.IsValid(token, makiosk))
             {
                 return BadRequest();
             }
 
+            QLKIOSKEntities db = new QLKIOSKEntities();
+
             try
             {
-                KIOSK k = db.KIOSKs.SingleOrDefault(x => x.MAKO.Equals(makiosk));
+                v_kiosk_constr k = db.v_kiosk_constr.SingleOrDefault(x => x.MAKO.Equals(makiosk));
 
                 if (k != null && ModelState.IsValid)
                 {
-                    k.MaToken = null;
-
-                    db.SaveChanges();
+                    db.sp_api_SetToken(makiosk, null);
                     return Ok();
                 }
             }
@@ -52,15 +52,6 @@ namespace KIOSKAPI.Controllers
             }
 
             return BadRequest();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

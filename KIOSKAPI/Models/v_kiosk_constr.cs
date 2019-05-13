@@ -12,13 +12,10 @@ namespace KIOSKAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ChiTietBA_MH
+    public partial class v_kiosk_constr
     {
-        public int MaBA { get; set; }
-        public int MaMH { get; set; }
-        public bool TrangThaiMA { get; set; }
-    
-        public virtual BuoiAn BuoiAn { get; set; }
-        public virtual MatHang MatHang { get; set; }
+        public string MAKO { get; set; }
+        public string ConnectStr { get; set; }
+        public string MaToken { get; set; }
     }
 }

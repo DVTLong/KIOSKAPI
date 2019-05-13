@@ -10,8 +10,6 @@ namespace KIOSKAPI.Controllers
 {
     public class GetDotKhuyenMaisController : ApiController
     {
-        private QLKIOSKEntities db = new QLKIOSKEntities();
-
         // GET: api/GetDotKhuyenMais/
         /// <summary>
         /// Lấy danh sách đợt khuyến mãi (đang khuyến mãi)
@@ -29,6 +27,8 @@ namespace KIOSKAPI.Controllers
             {
                 return Unauthorized();
             }
+
+            QLKIOSKClientEntities db = ClientDBInstance.GetDBInstance(makiosk);
 
             try
             {
@@ -58,13 +58,5 @@ namespace KIOSKAPI.Controllers
             return BadRequest();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

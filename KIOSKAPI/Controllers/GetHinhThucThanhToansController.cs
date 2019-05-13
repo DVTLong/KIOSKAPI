@@ -10,8 +10,6 @@ namespace KIOSKAPI.Controllers
 {
     public class GetHinhThucThanhToansController : ApiController
     {
-        private QLKIOSKEntities db = new QLKIOSKEntities();
-
         // GET: api/GetHinhThucThanhToans/
         /// <summary>
         /// Lấy danh sách hình thức thanh toán
@@ -30,6 +28,8 @@ namespace KIOSKAPI.Controllers
                 return Unauthorized();
             }
 
+            QLKIOSKClientEntities db = ClientDBInstance.GetDBInstance(makiosk);
+
             try
             {
                 if (ModelState.IsValid)
@@ -45,15 +45,6 @@ namespace KIOSKAPI.Controllers
             }
 
             return BadRequest();
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
