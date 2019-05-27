@@ -25,11 +25,12 @@ namespace KIOSKAPI.Controllers
                 char[] seperators = { ';' };
                 string[] splits = constrInfo.Split(seperators);
                 string instanceName = splits[0];
-                string userID = splits[1];
-                string password = splits[2];
+                string initialCatalog = splits[1];
+                string userID = splits[2];
+                string password = splits[3];
 
                 QLKIOSKClientEntities db = new QLKIOSKClientEntities();
-                db.ChangeDatabase(initialCatalog: "QLKIOSK", userId: userID, password: password, dataSource: instanceName);
+                db.ChangeDatabase(initialCatalog: initialCatalog, userId: userID, password: password, dataSource: instanceName);
                 return db; 
             }
         }

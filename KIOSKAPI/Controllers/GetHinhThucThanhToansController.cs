@@ -34,7 +34,16 @@ namespace KIOSKAPI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    hinhThucThanhToans = db.v_api_HinhThucThanhToan.ToList();
+                    List<sp_api_getHinhThucThanhToan_Result> sp_result = db.sp_api_getHinhThucThanhToan().ToList();
+                    foreach (sp_api_getHinhThucThanhToan_Result item in sp_result)
+                    {
+                        hinhThucThanhToans.Add(new v_api_HinhThucThanhToan()
+                        {
+                            MaHTTT = item.MaHTTT,
+                            TenHTTT = item.TenHTTT,
+                            ImageHTTT = item.ImageHTTT
+                        });
+                    } 
                     return Ok(hinhThucThanhToans);
                 }
             }

@@ -48,6 +48,12 @@
     <Reference Include="EntityFrameworkExtras.EF6, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFrameworkExtras.EF6.1.0.0\lib\net45\EntityFrameworkExtras.EF6.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -209,10 +215,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ChatHub.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ClearTokenController.cs" />
     <Compile Include="Controllers\ClientDBInstance.cs" />
     <Compile Include="Controllers\ConnectionTools.cs" />
+    <Compile Include="Controllers\GetAllMatHangsController.cs" />
     <Compile Include="Controllers\GetBuoiAnsController.cs" />
+    <Compile Include="Controllers\GetChiTietGiamGiaTheoTGHDController.cs" />
     <Compile Include="Controllers\GetDotKhuyenMaisController.cs" />
     <Compile Include="Controllers\GetHinhThucThanhToansController.cs" />
     <Compile Include="Controllers\GetLoaiMatHangsController.cs" />
@@ -257,13 +267,22 @@
       <DependentUpon>ModelMain.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\NapTienRequestCollection.cs" />
+    <Compile Include="Models\sp_api_getAllMatHang_Result.cs">
+      <DependentUpon>ModelClient.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_api_getBuoiAn_Result.cs">
       <DependentUpon>ModelClient.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_api_getChiTietGiamGiaTheoSL_Result.cs">
       <DependentUpon>ModelClient.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_api_getChiTietGiamGiaTheoTGHD_Result.cs">
+      <DependentUpon>ModelClient.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_api_getDotKhuyenMai_Result.cs">
+      <DependentUpon>ModelClient.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_api_getHinhThucThanhToan_Result.cs">
       <DependentUpon>ModelClient.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_api_getLoaiMatHang_Result.cs">
@@ -277,27 +296,14 @@
     </Compile>
     <Compile Include="Models\sp_LapHoaDon.cs" />
     <Compile Include="Models\sp_NapTien.cs" />
-    <Compile Include="Models\v_api_BuoiAn.cs">
-      <DependentUpon>ModelClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\v_api_ChiTietGiamGiaTheoSL.cs">
-      <DependentUpon>ModelClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\v_api_DotKhuyenMai.cs">
-      <DependentUpon>ModelClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\v_api_HinhThucThanhToan.cs">
-      <DependentUpon>ModelClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\v_api_LoaiMatHang.cs">
-      <DependentUpon>ModelClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\v_api_MatHang.cs">
-      <DependentUpon>ModelClient.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\v_api_QuangCao.cs">
-      <DependentUpon>ModelClient.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\v_api_BuoiAn.cs" />
+    <Compile Include="Models\v_api_ChiTietGiamGiaTheoSL.cs" />
+    <Compile Include="Models\v_api_DotKhuyenMai.cs" />
+    <Compile Include="Models\v_api_HinhThucThanhToan.cs" />
+    <Compile Include="Models\v_api_LoaiMatHang.cs" />
+    <Compile Include="Models\v_api_MatHang.cs" />
+    <Compile Include="Models\v_api_QuangCao.cs" />
+    <Compile Include="Models\v_api_ChiTietGiamGiaTheoTGHD.cs" />
     <Compile Include="Models\v_kiosk_constr.cs">
       <DependentUpon>ModelMain.tt</DependentUpon>
     </Compile>
@@ -386,6 +392,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -405,9 +413,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Chat\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\GetAllMatHangs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

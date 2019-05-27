@@ -27,13 +27,6 @@ namespace KIOSKAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<v_api_BuoiAn> v_api_BuoiAn { get; set; }
-        public virtual DbSet<v_api_ChiTietGiamGiaTheoSL> v_api_ChiTietGiamGiaTheoSL { get; set; }
-        public virtual DbSet<v_api_DotKhuyenMai> v_api_DotKhuyenMai { get; set; }
-        public virtual DbSet<v_api_HinhThucThanhToan> v_api_HinhThucThanhToan { get; set; }
-        public virtual DbSet<v_api_LoaiMatHang> v_api_LoaiMatHang { get; set; }
-        public virtual DbSet<v_api_MatHang> v_api_MatHang { get; set; }
-        public virtual DbSet<v_api_QuangCao> v_api_QuangCao { get; set; }
     
         public virtual ObjectResult<sp_api_getBuoiAn_Result> sp_api_getBuoiAn(string makiosk)
         {
@@ -95,6 +88,42 @@ namespace KIOSKAPI.Models
                 new ObjectParameter("makiosk", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_api_getQuangCao_Result>("sp_api_getQuangCao", makioskParameter);
+        }
+    
+        public virtual int sp_api_SetToken(string makiosk, string token)
+        {
+            var makioskParameter = makiosk != null ?
+                new ObjectParameter("makiosk", makiosk) :
+                new ObjectParameter("makiosk", typeof(string));
+    
+            var tokenParameter = token != null ?
+                new ObjectParameter("token", token) :
+                new ObjectParameter("token", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_api_SetToken", makioskParameter, tokenParameter);
+        }
+    
+        public virtual ObjectResult<sp_api_getAllMatHang_Result> sp_api_getAllMatHang(string makiosk)
+        {
+            var makioskParameter = makiosk != null ?
+                new ObjectParameter("makiosk", makiosk) :
+                new ObjectParameter("makiosk", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_api_getAllMatHang_Result>("sp_api_getAllMatHang", makioskParameter);
+        }
+    
+        public virtual ObjectResult<sp_api_getChiTietGiamGiaTheoTGHD_Result> sp_api_getChiTietGiamGiaTheoTGHD(Nullable<int> makm)
+        {
+            var makmParameter = makm.HasValue ?
+                new ObjectParameter("makm", makm) :
+                new ObjectParameter("makm", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_api_getChiTietGiamGiaTheoTGHD_Result>("sp_api_getChiTietGiamGiaTheoTGHD", makmParameter);
+        }
+    
+        public virtual ObjectResult<sp_api_getHinhThucThanhToan_Result> sp_api_getHinhThucThanhToan()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_api_getHinhThucThanhToan_Result>("sp_api_getHinhThucThanhToan");
         }
     }
 }
